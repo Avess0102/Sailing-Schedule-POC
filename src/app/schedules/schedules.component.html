@@ -1,0 +1,71 @@
+
+
+<!-- From and To Country Code Selector -->
+<div class="row m-5" [formGroup]="countryGroup">
+    <div class="col-lg-6">
+        <label for="country1">From</label>
+        <select class="form-select" formControlName="country1" name="repeatSelect" #country1>
+            <option value="From" selected> From </option>
+            <option *ngFor="let country of countryData" [ngValue]="country.code" value="{{country.code}}">{{country.name}}
+            </option>
+        </select>
+    </div>
+    <div class="col-lg-6">
+        <label for="country2">To</label>
+        <select class="form-select" formControlName="country1" name="repeatSelect" #country2>
+            <option value="To" selected> To </option>
+            <option *ngFor="let country of countryData" [ngValue]="country.code" value="{{country.code}}">{{country.name}}
+            </option>
+        </select>    
+    </div>
+</div>
+
+<!-- <button (click)="toggle()">Toggle</button> -->
+
+<!-- Button to send the country codes -->
+<button class="btn btn-warning d-grid mx-auto m-5" (click)="getCountry(country1.value, country2.value)">Get Schedules</button>
+
+
+<!-- Input Search To Filter by Voyage Number -->
+<div class="d-grid mx-auto px-5 py-2">
+    <input type="text" class="form-control" name="firstName" [(ngModel)]="firstName" (ngModelChange)="search()"
+        placeholder="Enter Voyage Name to Search">
+</div>
+
+<!-- Display the schedules data -->
+<div>
+    <!-- Table to show actual data -->
+    <table class="table mt-5 text-center table-striped-columns" id="schedulesTable">
+        <thead>
+            <tr>
+                <th (click)="sort('id')">ID <i class="fa fa-sort"></i> </th>
+                <th>Vessel Name</th>
+                <th>Voyage Number</th>
+                <th>Est. date of arrival</th>
+                <th>Est. date of departure</th>
+                <th>Port of Loading</th>
+                <th>Port of Discharge</th>
+                <th>Hub</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr *ngFor="let schedule of schedulesData | orderBy: key: reverse" #schedule> -->
+            <tr *ngFor="let schedule of schedulesData | orderBy: key: reverse" #schedule>
+                <td>{{schedule.id}}</td>
+                <td>{{schedule.vessel.name}}</td>
+                <td>{{schedule.voyageNumber}}</td>
+                <td>{{schedule.etd.slice(0, 10)}}</td>
+                <td>{{schedule.eta.slice(0, 10)}}</td>
+                <td>{{schedule.portOfLoading.name}}</td>
+                <td>{{schedule.portOfDischarge.name}}</td>
+                <td>{{schedule.hub.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- Button to export the data to excel -->
+    <button class="btn btn-warning d-grid mx-auto" (click)="exportexcel()">Export as Excel</button>
+</div>
+
+
