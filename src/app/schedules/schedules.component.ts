@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
 import { ApiserviceService } from './apiservice.service';
 import *  as XLSX from 'xlsx';
 import { FormGroup } from '@angular/forms';
@@ -20,9 +19,9 @@ export class SchedulesComponent {
   countryGroup: any;
   schedulesData: any;
   firstName: any;
-  constructor(private apiservice: ApiserviceService) { 
-    this.countryData=[];
-    this.schedulesData=[];
+  constructor(private apiservice: ApiserviceService) {
+    this.countryData = [];
+    this.schedulesData = [];
     this.countryGroup = new FormGroup({});
   }
 
@@ -37,12 +36,11 @@ export class SchedulesComponent {
 
     this.apiservice.getScheduleData(this.country1[1], this.country2[1]).subscribe((res => {
       this.schedulesData = res;
-      console.log(res);      
     }),
-    error => {
-      console.log(error);
-      
-    }
+      error => {
+        this.schedulesData = [];
+        this.country = alert("No Sailing Schedules are there.")
+      }
     )
   }
 
@@ -50,10 +48,10 @@ export class SchedulesComponent {
   /**
    * Function to export the data in excel format
    */
-  exportexcel() :void{
+  exportexcel(): void {
     let e = document.getElementById('schedulesTable');
-    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(e);
-    const wb:XLSX.WorkBook = XLSX.utils.book_new();
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(e);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Schedules');
     XLSX.writeFile(wb, this.fileName);
   }
@@ -68,11 +66,11 @@ export class SchedulesComponent {
       // console.log(res);      
     }),
 
-    this.apiservice.getScheduleData(this.country1[1], this.country2[1]).subscribe(res => {      
-      this.schedulesData = res;
-      // console.log(res);      
-    })
-    
+      this.apiservice.getScheduleData(this.country1[1], this.country2[1]).subscribe(res => {
+        this.schedulesData = res;
+        // console.log(res);      
+      })
+
   }
 
 
@@ -82,15 +80,15 @@ export class SchedulesComponent {
 
   toggle() {
     console.log("toggle");
-    
+
   }
 
-  
+
   /**
    * Function to filter the scheduled data using voyage number
    */
   search() {
-    if(this.firstName == "") {
+    if (this.firstName == "") {
       this.ngOnInit();
     } else {
       this.schedulesData = this.schedulesData.filter((res: any) => {
@@ -105,6 +103,6 @@ export class SchedulesComponent {
     this.key = key;
     this.reverse = !this.reverse;
     console.log("click");
-    
+
   }
 }

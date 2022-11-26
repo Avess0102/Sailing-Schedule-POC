@@ -1,29 +1,28 @@
-
-
 <!-- From and To Country Code Selector -->
 <div class="row m-5" [formGroup]="countryGroup">
-    <div class="col-lg-6">
+    <div class="col-lg-6 p-2">
         <label for="country1">From</label>
         <select class="form-select" formControlName="country1" name="repeatSelect" #country1>
             <option value="From" selected> From </option>
-            <option *ngFor="let country of countryData" [ngValue]="country.code" value="{{country.code}}">{{country.name}}
+            <option *ngFor="let country of countryData" [ngValue]="country.code" value="{{country.code}}">
+                {{country.name}}
             </option>
         </select>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 p-2">
         <label for="country2">To</label>
         <select class="form-select" formControlName="country1" name="repeatSelect" #country2>
             <option value="To" selected> To </option>
-            <option *ngFor="let country of countryData" [ngValue]="country.code" value="{{country.code}}">{{country.name}}
+            <option *ngFor="let country of countryData" [ngValue]="country.code" value="{{country.code}}">
+                {{country.name}}
             </option>
-        </select>    
+        </select>
     </div>
 </div>
 
-<!-- <button (click)="toggle()">Toggle</button> -->
-
 <!-- Button to send the country codes -->
-<button class="btn btn-warning d-grid mx-auto m-5" (click)="getCountry(country1.value, country2.value)">Get Schedules</button>
+<button class="btn btn-warning d-grid mx-auto m-5" (click)="getCountry(country1.value, country2.value)">Get
+    Schedules</button>
 
 
 <!-- Input Search To Filter by Voyage Number -->
@@ -69,3 +68,6 @@
 </div>
 
 
+<footer class="page-footer   text-center mt-5">
+    &copy; Saurabh Sambhe -- 2022
+</footer>
