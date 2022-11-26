@@ -70,17 +70,6 @@ export class SchedulesComponent {
         this.schedulesData = res;
         // console.log(res);      
       })
-
-  }
-
-
-  /**
-   * Toggle Function
-   */
-
-  toggle() {
-    console.log("toggle");
-
   }
 
 
